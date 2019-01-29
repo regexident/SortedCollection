@@ -1,5 +1,6 @@
 public protocol SortedCollectionProtocol: Collection
-    where SubSequence: SortedCollectionProtocol
+    where
+        SubSequence: SortedCollectionProtocol
 {
     associatedtype Key
 

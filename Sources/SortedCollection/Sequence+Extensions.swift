@@ -1,5 +1,6 @@
 extension Sequence
-    where Element: Comparable
+    where
+        Element: Comparable
 {
     public func isSorted() -> Bool {
         return self.isSorted { $0 < $1 }

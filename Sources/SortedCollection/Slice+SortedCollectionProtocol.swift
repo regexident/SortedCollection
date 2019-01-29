@@ -1,6 +1,6 @@
 extension Slice: SortedCollectionProtocol
     where
-    Base: SortedCollectionProtocol
+        Base: SortedCollectionProtocol
 {
     public typealias Key = Base.Key
 

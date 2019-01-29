@@ -19,7 +19,8 @@ extension SortedCollection
 }
 
 extension SortedCollection
-    where Key: Comparable
+    where
+        Key: Comparable
 {
     public init(
         sorted: Base,
