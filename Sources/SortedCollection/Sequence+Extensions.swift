@@ -1,4 +1,4 @@
-extension Collection
+extension Sequence
     where Element: Comparable
 {
     public func isSorted() -> Bool {
@@ -6,7 +6,7 @@ extension Collection
     }
 }
 
-extension Collection {
+extension Sequence {
     public func isSorted(
         by areInIncreasingOrder: (Element, Element) throws -> Bool
     ) rethrows -> Bool {
@@ -17,23 +17,27 @@ extension Collection {
     }
 }
 
-extension Collection {
+extension Sequence {
     public func isSorted<Key>(
         for keyPath: KeyPath<Element, Key>,
         by areInIncreasingOrder: (Key, Key) throws -> Bool
     ) rethrows -> Bool {
-        var previousIndex = self.startIndex
-        var currentIndex = self.index(after: previousIndex)
-        while currentIndex < self.endIndex {
-            guard try !areInIncreasingOrder(
-                self[currentIndex][keyPath: keyPath],
-                self[previousIndex][keyPath: keyPath]
-            ) else {
+        var iterator = self.makeIterator()
+        
+        guard let element = iterator.next() else {
+            return true
+        }
+        
+        var previous = element[keyPath: keyPath]
+        
+        while let element = iterator.next() {
+            let current = element[keyPath: keyPath]
+            if try areInIncreasingOrder(current, previous) {
                 return false
             }
-            previousIndex = currentIndex
-            currentIndex = self.index(after: currentIndex)
+            previous = current
         }
+        
         return true
     }
 }
