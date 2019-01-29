@@ -1,19 +1,17 @@
 extension Collection
-    where Element: Comparable & IdentityProtocol
+    where Element: Comparable
 {
     public func isSorted() -> Bool {
         return self.isSorted { $0 < $1 }
     }
 }
 
-extension Collection
-    where Element: IdentityProtocol
-{
+extension Collection {
     public func isSorted(
         by areInIncreasingOrder: (Element, Element) throws -> Bool
     ) rethrows -> Bool {
         return try self.isSorted(
-            for: \.identity,
+            for: \.self,
             by: areInIncreasingOrder
         )
     }

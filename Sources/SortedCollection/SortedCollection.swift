@@ -6,13 +6,13 @@ public struct SortedCollection<Base: Collection, Key> {
 
 extension SortedCollection
     where
-        Base.Element: Comparable & IdentityProtocol,
+        Base.Element: Comparable,
         Key == Base.Element
 {
     public init(sorted: Base) {
         self.init(
             sorted: sorted,
-            for: \.identity,
+            for: \.self,
             by: { $0 < $1 }
         )
     }
@@ -54,7 +54,7 @@ extension SortedCollection {
 extension SortedCollection
     where
         Base: MutableCollection & RandomAccessCollection,
-        Base.Element: Comparable & IdentityProtocol,
+        Base.Element: Comparable,
         Key == Base.Element
 {
     public init(sorting unsorted: Base) {
@@ -68,7 +68,6 @@ extension SortedCollection
 extension SortedCollection
     where
         Base: MutableCollection & RandomAccessCollection,
-        Base.Element: IdentityProtocol,
         Key == Base.Element
 {
     public init(
@@ -77,7 +76,7 @@ extension SortedCollection
     ) {
         self.init(
             sorting: unsorted,
-            for: \.identity,
+            for: \.self,
             by: areInIncreasingOrder
         )
     }

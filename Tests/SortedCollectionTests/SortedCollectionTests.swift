@@ -2,14 +2,10 @@ import XCTest
 
 @testable import SortedCollection
 
-extension Int: IdentityProtocol {}
-
 struct Person {
     let name: String
     let age: Int
 }
-
-extension Person: IdentityProtocol {}
 
 extension Person: Equatable {
     static func ==(lhs: Person, rhs: Person) -> Bool {
