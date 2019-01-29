@@ -105,3 +105,9 @@ extension SortedCollection
         )
     }
 }
+
+extension SortedCollection {
+    public func isSorted() -> Bool {
+        return true
+    }
+}
